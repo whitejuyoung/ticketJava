@@ -1,0 +1,162 @@
+@CHARSET "UTF-8";
+
+/*라인*/
+div#line {
+   width: 940px;
+   border-bottom: 1px solid #333;
+   padding: 15px;
+   margin-left: 40px;
+}
+
+/*공연 정보 컨테이너*/
+div#info-container{
+
+
+}
+div#information{
+    height: 50px;
+   width: 550px;
+   position: relative;
+   left: 50px;
+   top: 10px;
+}
+span.bigInfo {
+   font-size: 24px;
+   font-weight: 800;
+   margin-right: 15px;
+   font-family: Nanum Gothic;
+}
+span.smallInfo {
+   font-size: 14px;
+   margin-right: 3px;
+}
+/*공연 상세 정보 div*/
+div#detailInfo{
+    width: 635px;
+   height: 445px;
+    border: 1px solid rgb(224,224,224);    
+   top: 30px;
+   position: relative;
+   left: 50px;
+   background: gray;
+}
+
+/*예매하기(달력 등) div*/
+div#scheduleInfo {
+    height: 445px;
+    width: 215px;
+    position: relative;
+    bottom: 415px;
+    left: 700px;
+    background: rgb(255, 255, 255);
+    border: 1px solid #dadada;
+}
+button.blueBtn {
+    background: rgb(52, 152, 219);
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    width: 210px;
+    height: 40px;
+    font-size: 16px;
+    position: absolute;
+    bottom: 4px;
+    right: 1px;
+    font-weight: bold;
+}
+div#stage {
+    text-align: center;
+   font-size: 40px;
+   color: lightgray;
+   font-family: 'Nanum Gothic', sans-serif;
+   margin-bottom: 15px;
+   margin-top: 15px;
+}
+
+div.seat {
+    border-bottom: lightgray 1px solid;
+    border-top: lightgray 1px solid;
+    background: white;
+    text-align: center;
+    color: navy;
+    font-weight: bold;
+}
+div.seat img {
+    width: 10px;
+    height: 10px;
+    margin: 0px;
+    box-shadow: 2px 2px darkgrey;
+}
+
+div.seat img:hover{
+    cursor: pointer;
+}
+
+div.seat #floor{
+    width: 10px;
+    height: 10px;
+    color: white;
+    background: black;
+    font-size: 25px;
+   border-radius: 20px;
+    
+}
+div#stage2{
+    text-align: center;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-top: -35px;
+    margin-bottom: -25px;
+
+}
+div#rseat {
+    text-align: center;
+    background: rgb(241, 241, 241);
+    height: 50px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 14px;
+}
+div#cseat {
+    text-align: center;
+    background: #f1f1f1;
+    height: 50px;
+    font-weight: bold;
+    margin-top: -25px;
+    font-size: 14px;
+    padding-top: 15px;
+}
+input#row {
+    text-align: center;
+    width: 20px;
+    height: 30px;
+    border: 0px;
+    background: rgb(255, 255, 255);
+    font-size: 15px;
+}
+input#no {
+    border: 0px;
+    text-align: center;
+    width: 20px;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    font-size: 13px;
+}
+div#selectSeat {
+    text-align: center;
+    font-size: 15px;
+    margin-left: 60px;
+    margin-top: 15px;
+}
+div#possibleSeat {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+table#tbl-seat {
+    font-size: 13px;
+}
+div#ticketPrice{
+	color: blue;
+}

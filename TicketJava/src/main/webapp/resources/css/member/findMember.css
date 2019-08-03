@@ -1,0 +1,151 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Ubuntu:700i&display=swap');
+body { 
+	font-family: Nanum Gothic;
+	color: #333;
+}
+div#findMemberDiv{
+	width: 780px;
+	height: 380px;
+	text-align: center;
+}
+div#findMemberDiv table#findMemberTable{
+	width: 790px;
+	height: 380px;
+	border: none;
+	text-align: center;
+	margin: 0 auto;
+}
+
+div#findMemberDiv table#findMemberTable h2{
+	text-align: left;
+	margin-left: 15px;
+	color: #38494c;
+	background: #f1c40f;
+    width: 365px;
+    height: 50px;
+    line-height: 2em;
+    border-radius: 2px;
+    
+}
+div#findMemberDiv table#findMemberTable{
+	border-spacing: 0px;
+}
+div#findMemberDiv table#findMemberTable td{
+	width: 395px;
+	height: 380px;
+	vertical-align: top;
+}
+div#findMemberDiv table#findMemberTable td#findIdTd{
+	border-right: 1px solid lightgrey;
+	
+}
+div#findMemberDiv table#findMemberTable div.findIdTitle{
+	width: 360px;
+    height: 30px;
+    margin: 0 auto 5px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+div#findMemberDiv table#findMemberTable div.findIdContent{
+    width: 360px;
+    height: 200px;
+    display: none;
+    margin: 0 auto;
+}
+div#findMemberDiv table#findMemberTable div.findPasswordContent{
+	width: 360px;
+    height: 270px;
+    margin: 0 auto;
+}
+div#findMemberDiv table#findMemberTable div#findIdContentByPhone{
+	display: block;
+}
+div#findMemberDiv table#findMemberTable div.findIdContent input,
+div#findMemberDiv table#findMemberTable div.findPasswordContent input{
+	width: 100%;
+    height: 40px;
+    padding-left: 8px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    vertical-align: top;
+    font-size: 15px;
+    color: #202020;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+div#findMemberDiv table#findMemberTable div.findPasswordContent input{
+	margin-bottom: 22px;
+}
+
+div#findMemberDiv table#findMemberTable div.findIdContent button,
+div#findMemberDiv table#findMemberTable div.findPasswordContent button{
+	background-color: white;
+    width: 100%;
+    height: 45px;
+    line-height: 42px;
+    border-radius: 2px;
+    border: 1px solid #ef3e42;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    
+    color: #ef3e42;
+    margin-top: 10px;
+    cursor: pointer;
+}
+div#findMemberDiv table#findMemberTable div.findPasswordContent button{
+	margin-top: 20px;
+}
+div#findMemberDiv table#findMemberTable div.findIdContent input:focus,
+div#findMemberDiv table#findMemberTable div.findPasswordContent input:focus{
+	outline: none;
+}
+div#findMemberDiv table#findMemberTable div.findIdContent button:focus,
+div#findMemberDiv table#findMemberTable div.findPasswordContent button:focus{
+	outline: none;
+}
+
+
+/*아이디 비밀번호 찾기 결과창 (findMemberEnd)*/
+div#findMemberDiv table#findMemberTable td#findMemberResultTd{
+	width: 790px;
+	height: 380px;
+	vertical-align: top;
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd h2{
+	font-family: Ubuntu;
+    font-size: 35px;
+    width: 750px;
+	line-height: 1.7em;
+	margin: 10px auto;
+	
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd div.findIdContent{
+	width: 790px;
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd button{
+	width: 300px;
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd button#closePopupBtn{
+	background: rgb(52, 152, 219);
+	border-color: rgb(52, 152, 219);
+	margin-left: 10px;
+	color: #fff; 
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd div.resultInfoDiv{
+	width: 600px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 80px auto 60px;
+	vertical-align: middle;
+}
+div#findMemberDiv table#findMemberTable td#findMemberResultTd div.resultInfoDiv span#memberIdSpan{
+	color:#ef3e42; 
+	font-size: 25px;
+}

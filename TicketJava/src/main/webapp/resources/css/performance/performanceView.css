@@ -1,0 +1,374 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+body{
+	font-family: "Nanum Gothic";
+}
+
+/*라인*/
+div#line {
+    width: 940px;
+    border-bottom: 1px solid #333;
+    padding: 15px;
+    margin-left: 40px;
+}
+
+/*공연 정보 컨테이너*/
+div#info-container{
+ height: 100%;
+
+}
+div#information{
+	height: 50px;
+    width: 900px;
+    position: relative;
+    left: 50px;
+    top: 10px;
+}
+span.bigInfo {
+    font-size: 24px;
+    font-weight: 800;
+    margin-right: 15px;
+    font-family: Nanum Gothic;
+}
+span.smallInfo {
+    font-size: 14px;
+    margin-right: 3px;
+}
+td.boldTd {
+    font-size: 14px;
+    font-weight: 800;
+    color: #424242;
+    font-color: rebeccapurple;
+}
+td.contentTd {
+    font-size: 13px;
+}
+td.contentTd2 {
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+/*공연 상세 정보 div*/
+div#performanceRating{
+    display: inline-block;
+}
+div#detailInfo{
+	width: 635px;
+	height: 490px;
+	border: 1px solid rgb(224,224,224);
+	top: 25px;
+	position: relative;
+	left: 50px;
+	overflow: hidden;
+}
+table#PerformanceInfo{
+    border-collapse: collapse;
+    position: relative;
+    top: black;
+    top: 20px;
+    left: 20px;
+    width: 590px;
+}
+/*예매자 정보*/
+div#personInfo {
+    width: 367px;
+    height: 210px;
+    border-top: 1px solid #7b7b7b;
+    position: relative;
+    left: 258px;
+    bottom: 50px;
+    padding-top: 10px;
+}
+
+/*예매자 성별통계*/
+div#personInfo div#ticketingGenderRate{
+	position: relative;
+    bottom: 315px;
+    left: 65px;
+    max-width: 50px;
+}
+div#personInfo div#ticketingGenderRate span.genderTag{
+	color: #3c3c3c;
+    font-size: 12px;
+    font-weight: 600;
+}
+div#personInfo div#ticketingGenderRate span.genderPercentage{
+	color: #3c3c3c;
+    font-size: 15px;
+    font-weight: 600;
+} 
+div#personInfo span {
+    font-size: 14px;
+    font-weight: 800;
+    color: #424242;
+    position: relative;
+    top: 15px;
+}
+p#ticketingRate {
+    font-size: 14px;
+    font-weight: 800;
+    color: #424242;
+}
+/*구글차트-막대그래프*/
+div#chart_div {
+    bottom: 142px;
+    left: 90px;
+    position: relative;
+    bottom: 5ox;
+}
+
+/*예매하기(달력 등) div*/
+div#scheduleInfo{
+	height: 490px;
+	width: 270px;
+	position: relative;
+	bottom: 465px;
+	left: 700px;
+	background: rgb(237, 237, 237);
+}
+#page-body {
+    max-width: 260px;
+    margin-left: 8px;
+    position: relative;
+    bottom: 36px;
+}
+button.blueBtn {
+    background: rgb(52, 152, 219);
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    width: 260px;
+    height: 40px;
+    position: relative;
+    left: 5px;
+    bottom: 32px;
+    font-size: 15px;
+    font-weight: bold;
+}
+/*공연일 보기 버튼*/
+button#showAvailableDay {
+    font-size: 12px;
+    border-radius: 7px;
+    background: #f39c12db;
+    color: white;
+    border: 1px;
+    padding: 4px 12px;
+    font-weight: 700;
+    position: relative;
+    left: 176px;
+    z-index: 10;
+}
+/*날짜와 회차를 선택해주세요*/
+span#beforeSelection {
+    font-size: 11px;
+    color: #a2a2a2;
+    position: relative;
+    left: 61px;
+    top: 28px;
+}
+img#redyellow {
+    position: relative;
+    left: 135px;
+    margin-top: 5px;
+    bottom: 40px;
+}
+/*예매 가능한 좌석*/
+div#possibleSeat{
+	width: 260px;
+	height: 70px;
+	background: white;
+	position: relative;
+    left: 5px;
+    bottom: 40px;
+}
+/*예매불가능할때*/
+div#impossibleSeat {
+    width: 260px;
+    height: 70px;
+    background: #ededed;
+    position: relative;
+    left: 5px;
+    top: 195px;
+}
+p.p-smallTitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(69, 69, 69);
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+p#p-second {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(69, 69, 69);
+    position: relative;
+    left: 10px;
+    bottom: 30px;
+}
+/*회차를 선택해주세요*/
+select#selectionOf {
+    width: 260px;
+    border-radius: 5px;
+    height: 30px;
+    position: relative;
+    left: 5px;
+    font-size: 12px;
+    margin-top: 5px;
+    bottom: 40px;
+}
+/*몇석 남았는지*/
+span#afterSelection {
+    font-size: 13px;
+    position: relative;
+    left: 20px;
+    top: 23px;
+}
+
+
+
+
+
+ 
+/* 아래 info div  */
+#bottom-info{
+	width: 930px;
+	margin-left: 50px;
+	position: relative;
+	bottom: 440px;
+	
+}
+#bottom-info div a{
+	color : gray;
+}
+
+#bottom-info-detail{
+	text-align: center;
+	
+}
+#bottom-info-casting{
+	text-align: center;
+}
+#bottom-info-review{
+	padding: 20px 60px 0px 60px;
+	
+}
+#bottom-info-place{
+	text-align: center;
+	width: 930px;
+	height: 500px;
+	padding: 20px 60px 0px 60px ;
+}
+#bottom-info-notice{
+	padding: 20px 40px 0px 40px ;
+	font-size : 14px;
+}
+#bottom-info-notice p.notice-title{
+	font-size: 21px;
+	font-weight: bolder;
+}
+#bottom-info-notice p.notice-subTitle{
+	font-size: 16px;
+	font-weight: bold;
+}
+#bottom-info-notice .size-1{
+	font-size: 12px;
+	color : gray;
+	
+}
+#bottom-info-notice span{
+	color : gray;
+	font-size: 13px;
+	
+}
+.fade{
+	width: 930px;
+	position: relative;
+	bottom: 420px;
+	margin-left: 50px;
+}
+
+/* 리뷰 꾸미기 */
+.review-div{
+	word-wrap: break-word;
+	
+}
+.review-div .review-member-id{
+	font-size: 18px;
+	font-weight: bold;
+}
+.review-div .review-date{
+	font-size: 12px;
+	color: gray;
+}
+.review-div .review-content{
+	font-size: 14px;
+}
+
+.review-div .review-star{
+	display: inline-block;
+	width: 150px;
+	margin-bottom: 5px;
+	/* float: right; */
+}
+
+
+#bottom-info-casting img{
+    max-width: 800px;
+}
+#bottom-info-detail img{
+    max-width: 800px;
+}
+#PerformanceInfo tr td img {
+    width:210px;
+    height:280px;
+}
+
+/*  리뷰 작성 css */
+div#review-write{
+	
+	
+	
+}
+div#review-write div.input-group{
+	/* display:inline-block; */
+	width: 750px;
+	
+}
+div#review-write div.input-group textarea.form-control{
+	box-shadow: none;
+	
+}
+#review-star-write{
+	display: inline-block;
+	margin-bottom: 5px;
+}
+div#review-write button {
+    position: relative;
+    bottom: 60px;
+    left: 760px;
+    height: 40px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #3498db;
+    font-size: 13px;
+    font-weight: bold;
+    top: -51px;
+    border: 1px solid #3498db;
+}
+span#review-write-title {
+    margin-left: 0px;
+    font-size: 18px;
+    font-weight: 900;
+    color: #545454;
+    margin-right: 20px;
+    /* margin-bottom: 10px; */
+    /* padding-bottom: 18px; */
+}
+div#review-star-write {
+    position: relative;
+    bottom: 3px;
+}
+
+
+

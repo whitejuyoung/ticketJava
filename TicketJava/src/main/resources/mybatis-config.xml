@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+  
+  <settings>
+  	<setting name="jdbcTypeForNull" value="NULL" />
+  	<!-- 파라미터전달된 데이터가 NULL인 경우, db에서도 NULL로 인식해라 -->
+  	<setting name="mapUnderscoreToCamelCase" value="true"/>
+  	<!-- 컬럼명에 _를 사용한 경우, java코드에서는 camelCasing으로 치환할 것 -->
+  </settings>
+  
+  <typeAliases>
+ 	<typeAlias type="com.tj.ticketjava.admin.model.vo.Schedule" alias="schedule"/> 
+  	<typeAlias type="com.tj.ticketjava.performance.model.vo.Performance" alias="performance"/>
+  	<typeAlias type="com.tj.ticketjava.performance.model.vo.PerformanceImg" alias="performanceImg"/>
+  	<typeAlias type="com.tj.ticketjava.ticket.model.vo.Seat" alias="seat"/>
+  	<typeAlias type="com.tj.ticketjava.member.model.vo.Member" alias="member"/>
+  	<typeAlias type="com.tj.ticketjava.ticket.model.vo.Ticket" alias="ticket"/>
+  	<typeAlias type="com.tj.ticketjava.ticket.model.vo.Purchase" alias="purchase"/>
+  	<typeAlias type="com.tj.ticketjava.member.model.vo.Point" alias="point"/>
+  	<typeAlias type="com.tj.ticketjava.review.model.vo.Review" alias="review"/>
+  	
+  	<!-- 메인 -->
+  	<typeAlias type="com.tj.ticketjava.admin.model.vo.PerformanceImage" alias="performanceImage"/>
+  	<typeAlias type="com.tj.ticketjava.performance.model.vo.Classification" alias="classification"/>
+  	<typeAlias type="com.tj.ticketjava.performance.model.vo.Place" alias="place"/>
+  	
+  </typeAliases> 
+  
+  
+  
+</configuration>

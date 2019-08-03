@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.tj.ticketjava" />
+	
+	<!-- #8. interceptor 등록 -->
+	<!-- DispatcherServlet과 Controller의 handler 메소드 사이에서 intercept 한다 -->
+	<!-- 그래서 servlet-context.xml에 작성하는 것 -->
+	<interceptors>
+		<interceptor>
+			<!-- board에 관한 모든 요청에 대해서ㅐ 이 interceptor를 실행하겠다 -->
+			<!-- board 밑에 경로가 어쨌든지 간에 (없어도 됨) 그 밑에 .do로 끝나는 모든 요청에 대해 -->
+			<mapping path="/member/**/memberMyPage.do"/>
+			<mapping path="/member/**/ticketList.do"/>
+			<!-- 제외하고 싶은 걸 밑에 적어 주면 됨 -->
+			<!-- <exclude-mapping path="/board/boardList.do"/> -->
+			<beans:bean id="loginInterceptor"
+						class="com.tj.ticketjava.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<!-- #12.1 jsonView Bean 및 viewResolver 등록 -->
+	<!-- 요청한 viewName과 실제bean이름을 매핑해주는 BeanNameViewResolver를 사용함. -->
+	<!-- bean아이디는 viewResolver로 반드시 지정. 처리순서를 1로 우선처리되도록함. -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	    <beans:property name="order" value="1"/>
+	</beans:bean>
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
+	<!-- #13.1 @Responsebody사용을 위한 의존 : 빈등록 (스프링 5.x.x => MappingJackson2HttpMessageConverter -->
+	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	     <beans:property name="messageConverters">
+	         <beans:list>
+	             <beans:ref bean="jacksonMessageConverter"/>
+	             <beans:bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+	         </beans:list>
+	     </beans:property>
+	</beans:bean>
+	
+	<!-- #10.1 파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의) -->
+    <beans:bean id="multipartResolver" 
+    			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+        <beans:property name="maxUploadSize" value="10485760" /> <!-- max 파일용량은 10MB이다. -->
+    </beans:bean>
+	
+</beans:beans>

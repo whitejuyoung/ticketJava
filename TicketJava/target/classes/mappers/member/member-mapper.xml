@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<insert id="insertMember">
+	insert into member(MEMBER_ID,
+					   PASSWORD, 
+					   MEMBER_NAME, 
+					   PHONE, 
+					   EMAIL,
+					   GENDER, 
+					   BIRTH_DATE, 
+					   RECOMMEND_ID,
+					   google_member_id,
+					   facebook_member_id)
+	values(#{memberId},
+		   #{password},
+		   #{memberName},
+		   #{phone},
+		   #{email},
+		   #{gender},
+		   #{birthDate},
+		   #{recommendId},
+		   #{googleMemberId},
+		   #{facebookMemberId})
+	</insert>
+	
+	<select id="selectOneMember" resultMap="memberMap">
+		select *
+		from member
+		where member_id = #{memberId}
+	</select>
+	<resultMap type="member" id="memberMap">
+	</resultMap>
+	
+	<update id="memberInfoUpdate">
+		update member
+		set email = #{email},
+			phone = #{phone}
+		where member_id = #{memberId}
+	</update>
+	
+	<update id="memberPasswordUpdate">
+		update member
+		set password = #{password}
+		where member_id = #{memberId}
+	</update>
+	
+	<delete id="deleteMember">
+		delete from member
+		where member_id = #{memberId}
+	</delete>
+	
+	<select id="countTotalPurchase" resultType="_int">
+		select count(DISTINCT purchase_no)
+		from ticket
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="priceTotalPurchase" resultType="_int">
+		select nvl(sum(price), 0)
+		from ticket
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="selectTicketTotalContents" resultType="_int">
+		select count(*)
+		from purchase
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="purchaseList" resultMap="purchaseMap">
+		select *
+		from purchase
+		where member_id = #{memberId}
+		order by purchase_date desc
+	</select>
+	<resultMap type="purchase" id="purchaseMap">
+	</resultMap>
+	
+	<select id="ticketList" resultMap="ticketMap">
+		select *
+		from ticket
+		where purchase_no = #{purchaseNo}
+		order by purchase_date desc
+	</select>
+	<resultMap type="ticket" id="ticketMap">
+	</resultMap>
+	
+	<update id="sendTicket">
+		update ticket
+		set receiver_id = #{receiverId},
+			ticket_status = 'GIFTED'
+		where ticket_no = #{ticketNo}
+	</update>
+	
+	<select id="giftList" resultMap="ticketMap">
+		select *
+		from ticket
+		where receiver_id = #{memberId}
+		order by purchase_date desc
+	</select>
+	
+	<select id="selectGiftTotalContents" resultType="_int">
+		select count(*) cnt
+		from ticket
+		where receiver_id = #{memberId}
+	</select>
+	
+	<select id="selectOneTicket" resultMap="ticketMap">
+		select *
+		from ticket
+		where ticket_no = #{ticketNo}
+	</select>
+	
+	<select id="selectOneMemberByMemberName" resultMap="memberMap">
+		select *
+		from member
+		where member_name = #{memberName}
+	</select>
+	
+	<select id="selectOneMemberByEmail" resultMap="memberMap">
+		select *
+		from member
+		where email = #{email}
+	</select>
+	
+	<update id="updatePoint">
+		update member
+		set point = #{point}
+		where member_id = #{memberId}
+	</update>
+	
+	<insert id="insertAccumulatePoint">
+		insert into POINT(MEMBER_ID, 
+						  POINT, 
+						  POINT_DATE, 
+						  POINT_MESSAGE, 
+						  POINT_STATUS)
+		values(#{memberId}, 
+			   #{point}, 
+			   sysdate, 
+			   #{pointMessage}, 
+			   #{pointStatus})
+	</insert>
+	
+	<select id="selectPointTotalContents" resultType="_int">
+		select count(*) cnt
+		from point
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="pointList" resultMap="pointMap">
+		select *
+		from point
+		where member_id = #{memberId}
+		order by point_date desc
+	</select>
+	<resultMap type="point" id="pointMap">
+	</resultMap>
+	
+	<select id="selectOnePurchase" resultMap="purchaseMap">
+		select *
+		from purchase
+		where purchase_no = #{purchaseNo}
+	</select>
+	
+	
+	<delete id="deleteTicket">
+		delete 
+		from ticket
+		where ticket_no = #{ticketNo}
+	</delete>
+	
+	<select id="selectDeleteTicketTotalContents" resultType="_int">
+		select count(*) cnt
+		from ticket_delete
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="deleteTicketList" resultMap="ticketMap">
+		select *
+		from ticket_delete
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="deleteTicketListByPurchaseNo" resultMap="ticketMap">
+		select *
+		from ticket_delete
+		where purchase_no = #{purchaseNo}
+	</select>
+	
+	<select id="ticketListByMemberId" resultMap="ticketMap">
+		select *
+		from ticket
+		where member_id = #{memberId}
+	</select>
+	
+	<select id="selectUsableTicketCnt" resultMap="usableTicketCntMap">
+		select p.purchase_no, count(t.ticket_status) as "usable_ticket"
+		from purchase p
+		        left join ticket t on p.purchase_no = t.purchase_no
+		where p.member_id = #{memberId}
+		        AND
+		        t.ticket_status = 'USABLE'
+		group by p.purchase_no
+		order by p.purchase_no asc
+	</select>
+	<resultMap type="map" id="usableTicketCntMap">
+		<result column="purchase_no" property="purchaseNo"/>
+		<result column="usable_ticket" property="usableTicket"/>
+	</resultMap>
+	
+	<select id="selectPosterRenamedFileName" resultType="string">
+		select renamed_file_name
+		from performanceimage
+		where performance_no = #{performanceNo}
+			  and image_category = 'P'
+	</select>
+	
+	<select id="selectOneMemberByGoogle" resultMap="memberMap">
+		select *
+		from member
+		where google_member_id = #{googleMemberId}
+	</select>
+	
+	<update id="updateMemberGoogle">
+		update member
+		set google_member_id = #{googleMemberId}
+		where member_id = #{memberId}
+	</update>
+	
+	<select id="checkGoogleIdDuplicate" resultMap="memberMap">
+		select *
+		from member
+		where google_member_id = #{googleMemberId}
+	</select>
+	
+	<select id="selectOneMemberByFacebook" resultMap="memberMap">
+		select *
+		from member
+		where facebook_member_id = #{facebookMemberId}
+	</select>
+	
+	<select id="checkFacebookIdDuplicate" resultMap="memberMap">
+		select *
+		from member
+		where facebook_member_id = #{facebookMemberId}
+	</select>
+	
+	<select id="selectOneMemberByKakao" resultMap="memberMap">
+		select *
+		from member
+		where kakao_member_id = #{kakaoMemberId}
+	</select>
+	
+	<update id="updateMemberKakao">
+		update member
+		set kakao_member_id = #{kakaoMemberId}
+		where member_id = #{memberId}
+	</update>
+
+	<select id="selectOneMemberByPhoneAndName" resultMap="memberMap">
+		select *
+		from member
+		where member_name = #{memberName} and
+			  phone = #{phone}
+	</select>
+	
+	<select id="giftPurchaseList" resultMap="purchaseMap">
+		select distinct p.*
+		from purchase p
+		     left join ticket t on p.purchase_no = t.purchase_no
+		where t.receiver_id = #{memberId}
+	</select>
+	
+	<update id="updatePurchasePoint">
+		update purchase
+		set use_point = #{usePoint}
+		where purchase_no = #{purchaseNo}
+	</update>
+	
+	<update id="updatePurchaseAddress">
+		update ticket
+		set address = #{address}
+		where purchase_no = #{purchaseNo}
+	</update>
+	
+	<update id="updatePurchaseTotalPrice">
+		update purchase
+		set total_price = #{totalPrice}
+		where purchase_no = #{purchaseNo}
+	</update>
+	
+	
+	
+</mapper>

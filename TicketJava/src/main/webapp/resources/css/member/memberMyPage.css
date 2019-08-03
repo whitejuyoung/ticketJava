@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Ubuntu:700i&display=swap');
+body { 
+	font-family: Nanum Gothic;
+	color: #333;
+}
+
+div#myPageDiv {
+	margin: 0 auto;
+	width: 1004px;
+	height: 800px;
+	text-align: center;
+	background: rgb(244, 244, 244);
+	padding-top: 50px;
+}
+div#myPageDiv table#myPageTable{
+	margin: 0 auto;
+	border: 1px solid;
+	width: 800px;
+	height: 700px;
+	background: rgb(255, 255, 255);
+	border-collapse: collapse;
+	font-weight: bold;
+}
+div#myPageDiv table#myPageTable td{
+	border: 20px solid rgb(244, 244, 244);
+	padding-right: 50px;
+	padding-left: 50px;
+}
+div#myPageDiv table#myPageTable td.pointerTd{
+	cursor: pointer;
+}
+div#myPageDiv table#myPageTable img#smileImgBox{
+	width: 100px;
+}
+div#myPageDiv table#myPageTable td span#myPageGradeInfo{
+	font-size: 20px;
+}
+div#myPageDiv table#myPageTable td span#myPageGrade{
+	color: rgb(192, 57, 43);
+}
+div#myPageDiv table#myPageTable td a{
+	color: #333;
+	text-decoration: none;
+}
+div#myPageDiv table#myPageTable img.imgBox{
+	width: 70px;
+	vertical-align: super;
+}
+div#myPageDiv table#myPageTable div.mypageGuideDiv{
+	display: inline-block;
+	text-align: left;
+	padding-left: 30px;
+	width: 180px;
+}
+div#myPageDiv table#myPageTable div.mypageGuideDiv span.mypageGuideInfoSpan{
+	font-size: 13px;
+}

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+body{
+    font-family: "Nanum Gothic";
+}
+#ticketListDivWrapper{
+    width: 900px;
+    height: 100%;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    border-radius: 30px; 
+}
+#ticketListDiv{
+    width: 800px;
+    height: 100%;
+    margin: 30px auto;
+}
+#ticketListDiv button.ticketListTapBtn{
+    width: 200px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-width: 2px 2px 2px 20px;
+    border-bottom: none;
+    font-family: "Nanum Gothic";
+    font-weight: bold;
+    font-size: 18px;
+    background: white;
+    cursor: pointer;
+}
+#ticketListDiv button.ticketListTapBtn:focus{
+    outline: none;
+}
+#ticketListDiv hr#ticketListDivHr{
+    margin: 0; 
+    border: 0;
+    border-top: 2px solid #f1c40f;
+    color: #f1c40f;
+    border-color: #f1c40f;  /* 사파리 */
+    background-color: #f1c40f; /* 크롬, 모질라 등, 기타 브라우저 */
+    
+    border-top: 2px solid rgb(52, 152, 219);
+    color: rgb(52, 152, 219);
+    border-color: rgb(52, 152, 219);  /* 사파리 */
+    background-color: rgb(52, 152, 219); /* 크롬, 모질라 등, 기타 브라우저 */
+}
+#ticketListDiv h2{
+	font-family: "Nanum Gothic";
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
+#ticketListDiv #tickeyList-script{
+	font-family: "Nanum Gothic";
+	color: #333;
+	font-size: 16px;
+}
+#ticketListDiv #ticketListTable{
+    margin: 20px auto;
+    width: 800px;
+    border: none;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-collapse: collapse;
+}
+#ticketListDiv #ticketListTable th,
+#ticketListDiv #ticketListTable td{
+    border: none;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    height: 40px;
+}
+#ticketListDiv #ticketListTable th{
+    background: #eaeaea;
+}
+#ticketListDiv #ticketListTable tr[ticketNo],
+#ticketListDiv #ticketListTable tr[purchaseNo]{
+    cursor: pointer;
+}
+#ticketListDiv #ticketListPageBarDiv{
+    margin: 0 auto;
+    text-align: center;
+    width: 700px;
+    height: 50px;
+}
+#ticketListDiv ul.ticketListPageBar{
+    list-style: none;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    
+}
+#ticketListDiv ul.ticketListPageBar li{
+    float: left;
+    padding: 5px;
+}
+#ticketListDiv ul.ticketListPageBar li a{
+    text-decoration: none;
+    color: #38494c;
+    cursor: pointer;
+}
+#ticketListDiv ul.ticketListPageBar li.ticketListPageBar-page-cPage a{
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid #f1c40f;
+}
+#ticketListDiv ul.ticketListPageBar li.ticketListPageBar-disabled a{
+    cursor: auto;
+}

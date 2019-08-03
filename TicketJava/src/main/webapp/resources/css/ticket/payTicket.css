@@ -1,0 +1,244 @@
+@CHARSET "UTF-8";
+/*라인*/
+div#line {
+   width: 940px;
+   border-bottom: 1px solid #333;
+   padding: 15px;
+   margin-left: 40px;
+}
+/*공연 정보 컨테이너*/
+div#info-container{
+}
+div#information{
+    height: 50px;
+   width: 550px;
+   position: relative;
+   left: 50px;
+   top: 10px;
+}
+span.bigInfo {
+   font-size: 24px;
+   font-weight: 800;
+   margin-right: 15px;
+   font-family: Nanum Gothic;
+}
+span.smallInfo {
+   font-size: 14px;
+   margin-right: 3px;
+}
+/*공연 상세 정보 div*/
+div#detailInfo{
+    width: 635px;
+    height: 539px;
+    border: 1px solid rgb(224,224,224);
+    top: 30px;
+    position: relative;
+    left: 50px;
+    padding: 30px;
+}
+/*예매하기(달력 등) div*/
+div#scheduleInfo {
+    height: 539px;
+    width: 255px;
+    position: relative;
+    bottom: 509px;
+    left: 684px;
+    background: rgb(255, 255, 255);
+    border: 1px solid #f1f1f1;
+}
+button.blueBtn {
+    background: rgb(52, 152, 219);
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    width: 210px;
+    height: 40px;
+    font-size: 16px;
+    position: absolute;
+    bottom: 4px;
+    right: 1px;
+    font-weight: bold;
+}
+/*포인트 사용버튼*/
+button#usePointBtn {
+    width: 58px;
+    font-size: 13px;
+    height: 30px;
+    margin-right: 73px;
+    position: absolute;
+    top: 0px;
+}
+input#selectPoint {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    right: 160px;
+    border-radius: 5px;
+    padding: 3px;
+    border: 1px solid #b1b1b1;
+    top: 0px;
+}
+input#selectPoint:foucs{
+    outline: none;
+}
+span#myPoint {
+    position: relative;
+    left: 155px;
+    font-size: 15px;
+}
+div#ticketPriceTitle{
+    background: rgb(241, 241, 241);
+    padding-left: 25px;
+    padding-top: 15px;
+    height: 90px;
+    font-size: 14px;
+    font-weight: bold;
+}
+ul.title{
+    background: rgb(241, 241, 241);
+    list-style-type: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+li.titleList {
+    margin-left: -20px;
+}
+div.smalltitle{
+    margin-bottom: 30px;
+    position: relative;
+    left: 45px;
+    font-size: 14px;
+    font-weight: 600;
+}
+input#price{
+    position: relative;
+    left: 225px;
+    border: 0px;
+    font-weight: bold;
+    margin-right: 35px;
+    width: 126px;
+}
+input#seatArr:foucs{
+    outline: none;
+}
+select#seatArr{
+    position: relative;
+    left: 140px;
+    border-radius: 3px;
+    padding: 3px;
+    width: 80px;
+}
+span#ticketPrice {
+    color: rgb(41, 128, 185);
+    font-size: 25px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+div#chart{
+    position: relative;
+    top: 154px;
+    left: 40px;
+}
+div#allPrice{
+    position: absolute;
+    bottom: 100px;
+    background: rgb(241, 241, 241);
+    height: 90px;
+    width: 254px;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 25px;
+    padding-top: 15px;
+}
+span#allPriceSpan{
+    color: rgb(41, 128, 185);
+    font-size: 25px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+div#bottomlineChart {
+    border-bottom: 2px solid #d0d0d0;
+}
+label.form-check-label {
+    margin-bottom: 10px;
+}
+/*다음 버튼*/
+button#reservation-btn {
+    position: absolute;
+    bottom: 50px;
+    /* margin: 0 auto; */
+    left: 22px;
+}
+button#reservation-btn:hover{
+   cursor: pointer;
+}
+button#cancel-btn {
+    position: absolute;
+    bottom: 5px;
+    /* margin: 0 auto; */
+    left: 22px;
+}
+button#cancel-btn:hover{
+   cursor: pointer;
+}
+#seatInfo{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    right: 90px;
+    top: 100px;
+}
+img.seatall{
+        margin-bottom: 3px;
+    width: 10px;
+    height: 10px;
+    margin: 0px;
+    box-shadow: 2px 2px darkgrey;
+}
+div#zooso{
+    display: none;
+}
+#addressSearchBtn{
+    background: rgb(52, 152, 219);
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0px;
+    left: 400px;
+    font-weight: bold;
+}
+input.addressInput{
+    width: 300px;
+    border: none;
+}
+input#address2{
+	border-bottom: 1px solid;
+}
+/*ㅋㅋㅋ*/
+table#chartTable {
+    width: 217px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 115px;
+}
+table#chartTable th,
+table#chartTable td{
+    padding: 7px;
+}
+table#chartTable tr{
+    border-top: 2px solid #d0d0d0;
+    font-size: 14px;
+}
+table#chartTable th{
+    padding-left: 15px;
+}
+table#chartTable td{
+    text-align: center;
+}

@@ -1,0 +1,116 @@
+@charset "UTF-8";
+div #performanceContainer{
+	width: 100%;
+	min-height: 1000px;
+}
+
+div #performanceContainer-title{
+	padding: 20px 0px 0px 35px;	
+}
+
+span#performanceContainer-title-kr{
+	font-size: 20px;
+	font-weight: bold;
+	color: #464646;
+}
+span#performanceContainer-title-en{
+	color: gray;
+}
+span#performance-total{
+	font-size: 14px;
+	color: #5e5e5e;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+span#performance-total-cnt{
+	color: tomato;
+	font-weight: bold;
+}
+div#performanceList-container{
+}
+ul.allPerformanceList{
+	display: inline-block;
+	text-align: left;
+	padding: 10px 20px;
+	width: 247px;
+}
+ul.allPerformanceList li{
+	list-style: none;
+}
+.allTableImg{
+	width: 207px;
+    height: 273px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.list-date,
+.list-place{
+	color: gray;
+	font-size: 14px;
+}
+
+/* 페이지바 */
+
+#ticketListPageBarDiv{
+    margin: 0 auto;
+    text-align: center;
+    width: 700px;
+    height: 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+ul.ticketListPageBar{
+    list-style: none;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    
+}
+ul.ticketListPageBar li{
+    float: left;
+    padding: 5px;
+}
+ul.ticketListPageBar li a{
+    text-decoration: none;
+    color: #38494c;
+    cursor: pointer;
+}
+ul.ticketListPageBar li.ticketListPageBar-page-cPage a{
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid #f1c40f;
+}
+ul.ticketListPageBar li.ticketListPageBar-disabled a{
+    cursor: auto;
+}
+
+/* 검색시 */
+div#search-result{
+    position: relative;
+    padding: 30px;
+    padding-bottom: 0px;
+}
+div#search-result span{
+	color: tomato;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+div#none-search{
+	text-align: center;
+	margin: 50px;	
+}
+
+div#none-search img{
+	width: 50px;
+	height: 50px;
+}
+
+div#none-search p{
+	font-size: 20px;
+	color: #c0c0c0;
+	margin: 10px;
+}
+
+

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/********** 로고 **********/
+div#logo-container{
+   width: 240px;
+   text-align: right;
+   position: relative;
+   display: inline-block;
+   margin: 0px 20px 0px 50px;
+   top: 23px;
+   left: -20px;
+}
+div#logo-container span#logo-kr{
+   color: #8c8c8c;
+   font-size: 21px;
+   font-weight: bold;
+   display: inline-block;
+}
+div#logo-container span#logo-en{
+   font-family: Ubuntu;
+   font-size: 30px;
+   background: #c5c5c5;
+   color: #757575;
+   width: 500px;
+}
+div#info{
+    display: inline-block;
+    font-size: 13px;
+    color: gray;
+    position: relative;
+    top: 22px;
+    text-align: left;
+}
+#info-name{
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 5px;
+    
+}

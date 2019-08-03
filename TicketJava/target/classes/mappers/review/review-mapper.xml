@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review" >
+	<select id="selectReviewList" resultType="review">
+		select * from review where performance_no = #{performanceNo} order by review_date desc
+	</select>
+
+	<select  id="selectReviewTotalContents" resultType="_int">
+		select count(*) as cnt from review where performance_no = #{performanceNo}
+	</select>
+	
+	<insert id="insertReview" >
+		insert into review values(SEQ_REVIEW_NO.nextval, ${performanceNo}, #{memberId}, #{reviewContent}, sysdate, ${reviewRating})
+	</insert>
+	
+	<select id="checkReview" resultType="_int">
+		select count(*) from review where member_id = #{memberId} and performance_no = ${performanceNo} 
+	</select>
+
+
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ticket">
+   <insert id="insertTicket">
+       INSERT INTO seat
+       VALUES(#{scheduleNo}, #{performanceNo}, #{placeCode}, #{seatRow}, #{seatNo}, #{seatStatus}, seq_seat.nextVal)
+   </insert>
+   <select id="checkSeat" parameterType="map" resultMap="seatMap">
+       select *
+       from seat s left join schedule sc using (performance_no)
+       where to_char(schedule_date,'yyyy/mm/dd hh24:mi:ss') = #{time} and performance_no = #{performanceNo}
+   </select>
+   <select id="checkTicket" resultType="_int">
+       select count(*)
+       from seat
+       where schedule_no = #{scheduleNo} and
+             performance_no = #{performanceNo} and
+             seat_row = #{seatRow} and
+             seat_no = #{seatNo} and
+             seat_status = #{seatStatus} and
+             place_code = #{placeCode}
+   </select>
+   <select id="selectTicket" resultType="seat">
+       select *
+       from seat
+       where schedule_no = #{scheduleNo} and
+             performance_no = #{performanceNo} and
+             seat_row = #{seatRow} and
+             seat_no = #{seatNo} and
+             seat_status = #{seatStatus} and
+             place_code = #{placeCode}
+   </select>
+   <select id="ticketInfo" resultType="map">
+       select *
+        from seat
+        where seat_key= #{seatKey}
+   </select>
+    <select id="viewSchedule" resultType="map" parameterType="map">
+        select schedule_no
+        from schedule
+        where schedule_date = to_date('${selectedDate}','yyyy/mm/dd hh24:mi:ss') and performance_no = #{performanceNo}
+    </select>
+    
+    <insert id="addPurchase">
+       insert into purchase
+       values (seq_purchase.nextVal, #{memberId}, #{totalPrice},
+                 #{purchaseCount}, sysdate, #{performanceTitle},
+                 TO_DATE('${scheduleDate}','yyyy/mm/dd hh24:mi:ss'),
+                #{usePoint})
+    </insert>
+    
+    <update id="updateStatus">
+        UPDATE seat SET seat_status = 'no' WHERE seat_key = #{seatKey}
+    </update>
+    
+    <insert id="addTicket" parameterType="map">
+        insert into ticket
+       values (seq_ticket_no.nextVal, #{performanceNo}, #{placeCode},
+                 #{scheduleNo}, seq_purchase.currval, #{memberId},
+                 #{ticketOnePrice}, null,#{performanceTitle}, sysdate,
+                 TO_DATE('${scheduleDate}','yyyy/mm/dd hh24:mi:ss'), #{placeName}, #{memberName}, 'USABLE',
+                 #{seatRow}, #{seatNo}, #{ticketWay}, #{address}, #{paymentStatus},
+                 #{performanceCode}, null)
+    </insert>
+    
+    <select id="esunjoa" resultType="_int">
+        select count(*)
+        from seat s left join schedule sc using (performance_no)
+        where schedule_no = #{scheduleNo} and performance_no = #{performanceNo}
+                and seat_row = #{row} and seat_no = #{no}
+    </select>
+    
+    <delete id="deleteIng">
+        delete from seat
+        where seat_key = #{integer}
+    </delete>
+    
+    <select id="selectScheduleNo" resultType="_int">
+    	select schedule_no
+    	from ticket
+    	where ticket_no = #{tNo}
+    </select>
+    
+    <select id="selectSeatRow" resultType="string">
+    	select seat_row
+    	from ticket
+    	where ticket_no = #{tNo}
+    </select>
+    
+    <select id="selectSeatNo" resultType="string">
+    	select seat_no
+    	from ticket
+    	where ticket_no = #{tNo}
+    </select>
+    
+    <delete id="deleteSeat">
+    	delete from seat
+    	where schedule_no = #{scheduleNo} and seat_row = #{seatRow} and seat_no = #{seatNo}
+    </delete>
+   <resultMap type="seat" id="seatMap">
+       <!-- 고유키는 id 태그 쓰기 -->
+      <result column="schedule_no" property="scheduleNo"/>
+      <result column="performance_no" property="performanceNo"/>
+      <result column="place_code" property="placeCode"/>
+      <result column="seat_row" property="seatRow"/>
+      <result column="seat_no" property="seatNo"/>
+      <result column="seat_status" property="seatStatus"/>
+      <result column="seat_key" property="seatKey"/>
+   </resultMap>
+   
+ 	<select id="checkTicketSchedule" resultType="date">
+ 		select min(schedule_date) from ticket where member_id = #{memberId} and performance_no= ${performanceNo}
+ 	</select>    
+   
+   
+   
+   
+   
+   
+   
+</mapper>

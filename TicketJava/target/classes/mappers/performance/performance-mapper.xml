@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="performance" >
+	<select id="selectPerformance" resultType="performance">
+		select *
+		from performance T left join place P using(place_code) left join classification C on T.performance_code = c.performance_code left join performanceimage I using(performance_no)
+		where performance_no = #{performanceNo} and image_category = 'P'
+	</select>
+	
+	<select id="selectPerformanceRound" parameterType="map" resultType="map">
+		select to_char(schedule_date,'yyyy/mm/dd hh24:mi:ss') as performanceRound
+		from schedule
+		where (schedule_date between to_date('${selectedDate} 00:00:00','yyyy/mm/dd hh24:mi:ss') and to_date('${selectedDate} 23:59:59','yyyy/mm/dd hh24:mi:ss')) and performance_no = #{performanceNo}
+			AND
+       		sysdate+9/24 >= start_ticket_date
+		order by schedule_date
+	</select>
+	
+	<select id="selectscheduleNo" resultType="string" parameterType="map">
+		select schedule_no
+		from schedule
+		where to_char(schedule_date,'yyyy/mm/dd hh24:mi:ss') = #{time} and performance_no = #{performanceNo}
+
+	</select>
+
+	<select id="selectSoldSeat" resultType="int" parameterType="map">
+		select count(*) as cnt
+		from seat
+		where schedule_no = #{scheduleNo} and place_code = #{placeCode}
+	</select>
+	
+	<select id="selectAllSeat" resultType="int">
+		select place_seat_cnt as all_seat
+		from place
+		where place_code = #{palceCode}
+	</select>
+
+	<select id="selectTotalPeople" resultType="int">
+		select count(*) as total_people
+		from purchase U left join performance P using(performance_title)
+		where performance_no = #{performanceNo}
+	</select>
+	
+	<select id="selectGenderF" resultType="int">
+		select count(*) as gender_f
+		from purchase U left join performance P using(performance_title) left join member M using(member_id)
+		where performance_no = #{performanceNo} and gender = 'F'
+	</select>
+	
+	<select id="selectGenderM" resultType="int">
+		select count(*) as gender_m
+		from purchase U left join performance P using(performance_title) left join member M using(member_id)
+		where performance_no = #{performanceNo} and gender = 'M'
+	</select>
+	
+	<select id="selectAgeList" resultType="string">
+		select NVL(TRUNC(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(to_char(birth_date,'yyyy/mm/dd'), 1, 4), 'YY'))/12)+1, 0) AS age
+		from purchase U left join performance P using(performance_title) left join member M using(member_id)
+		where performance_no = #{performanceNo}
+	</select>
+
+	<select id="viewSchedule" resultType="string">
+		select distinct to_char(schedule_date,'yyyy/mm/dd') as schedule_date
+		from schedule
+		where performance_no = #{performanceNo}
+				AND
+       		sysdate >= start_ticket_date
+		order by schedule_date
+	</select>
+	
+	<select id="selectPerformanceImg" resultType="performanceImg">
+		select renamed_file_name,image_category,performance_no
+		from performanceimage
+		where performance_no = #{performanceNo}
+	</select>
+
+	
+	<!-- 메인 -->
+	<!-- 메인 -->
+	<select id="selectByTitle" resultType="performance">
+		select performance_title, performance_no
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%'
+	</select>
+	
+	<select id="selectMenuImgList" resultType="performance">
+		select p.performance_no,p.performance_title,p.start_date,p.end_date,i.renamed_file_name,c.performance_code_name
+		from performance p  join performanceimage i on p.performance_no = i.performance_no join CLASSIFICATION c on p.performance_code = c.performance_code
+		where c.performance_code_name = #{category} and image_category='P' and p.end_date>sysdate
+		order by end_date asc
+	</select>
+	
+	<select id="selectMenuImg" resultType="performance">
+		select p.performance_title,p.start_date,p.end_date,i.renamed_file_name,pl.place_name
+		from performance p  join performanceimage i on p.performance_no = i.performance_no join place pl on p.place_code = pl.place_code
+		where i.renamed_file_name = #{imgdetail}
+	</select>
+	
+	<select id="selectRank" resultType="performance">
+		select rownum rnum, A.*
+		from
+		    (select t.performance_no, 
+		                 p.performance_title,
+		                 i.renamed_file_name,
+		                 count(*) as "CNT"
+		    from ticket t  
+		        join performance p on t.performance_no = p.performance_no
+		        join performanceimage i on p.performance_no = i.performance_no
+		    where p.performance_code = 'MU' and i.image_category = 'P' and p.end_date>sysdate
+		    group by t.performance_no, p.performance_title,i.renamed_file_name
+		    order by CNT desc) A
+	</select>
+	
+	<select id="selectRankConcert" resultType="performance">
+		select rownum rnum, A.*
+		from
+		    (select t.performance_no, 
+		                 p.performance_title,
+		                 i.renamed_file_name,
+		                 count(*) as "CNT"
+		    from ticket t  
+		        join performance p on t.performance_no = p.performance_no
+		        join performanceimage i on p.performance_no = i.performance_no
+		    where p.performance_code = 'CO' and i.image_category = 'P' and p.end_date>sysdate
+		    group by t.performance_no, p.performance_title,i.renamed_file_name
+		    order by CNT desc) A
+	</select>
+	
+	<select id="selectRankPlay" resultType="performance">
+		select rownum rnum, A.*
+		from
+		    (select t.performance_no, 
+		                 p.performance_title,
+		                 i.renamed_file_name,
+		                 count(*) as "CNT"
+		    from ticket t  
+		        join performance p on t.performance_no = p.performance_no
+		        join performanceimage i on p.performance_no = i.performance_no
+		    where p.performance_code = 'TH' and i.image_category = 'P' and p.end_date>sysdate
+		    group by t.performance_no, p.performance_title,i.renamed_file_name
+		    order by CNT desc) A
+	</select>
+	
+	<!-- 전체보기페이지 -->
+	<select id="musicalList" resultType="performance">
+		select p.performance_no,p.performance_title,p.start_date,p.end_date,i.renamed_file_name,pl.place_name
+		from performance p  join performanceimage i on p.performance_no = i.performance_no join place pl on p.place_code = pl.place_code
+		where p.performance_code='MU' and image_category='P' and p.end_date>sysdate
+		order by p.performance_title asc
+	</select>
+	
+	<select id="selectMusicalTotalContents" resultType="_int">
+	 	select count(*) as "cnt"
+		from performance
+		where performance_code='MU'and end_date>sysdate
+	</select>
+	
+	<select id="concertList" resultType="performance">
+		select p.performance_no,p.performance_title,p.start_date,p.end_date,i.renamed_file_name,pl.place_name
+		from performance p  join performanceimage i on p.performance_no = i.performance_no join place pl on p.place_code = pl.place_code
+		where p.performance_code='CO' and image_category='P' and p.end_date>sysdate
+		order by p.performance_title asc
+	</select>
+	
+	<select id="selectConcertTotalContents" resultType="_int">
+	 	select count(*) as "cnt"
+		from performance
+		where performance_code='CO'and end_date>sysdate
+	</select>
+	
+	<select id="playList" resultType="performance">
+		select p.performance_no,p.performance_title,p.start_date,p.end_date,i.renamed_file_name,pl.place_name
+		from performance p  join performanceimage i on p.performance_no = i.performance_no join place pl on p.place_code = pl.place_code
+		where p.performance_code='TH' and image_category='P' and p.end_date>sysdate
+		order by p.performance_title asc
+	</select>
+	
+	<select id="selectPlayTotalContents" resultType="_int">
+	 	select count(*) as "cnt"
+		from performance
+		where performance_code='TH'and end_date>sysdate
+	</select>
+	
+	<!-- 자동완성 검색 -->
+	<select id="searchPerformance" resultType="performance">
+		select *
+		from performance p
+		   left join performanceimage i using(performance_no)
+		   left join place pl using(place_code)
+		where i.image_category='P' and p.performance_title like '%'||#{performanceTitle}||'%' and p.end_date>sysdate
+		order by performance_title
+	</select>
+	
+	<select id="musicalTotalContents" resultType="_int">
+		select count(*) as "cnt"
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%' and performance_code='MU'and end_date>sysdate
+	</select>
+	
+	<select id="concertTotalContents" resultType="_int">
+		select count(*) as "cnt"
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%' and performance_code='CO'and end_date>sysdate
+	</select>
+	
+	<select id="playTotalContents" resultType="_int">
+		select count(*) as "cnt"
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%' and performance_code='TH'and end_date>sysdate
+	</select>
+	
+	<select id="endPerformance" resultType="performance">
+		select *
+		from performance p
+		   left join performanceimage i using(performance_no)
+		   left join place pl using(place_code)
+		where i.image_category='P' and p.performance_title like '%'||#{performanceTitle}||'%' and sysdate>=p.end_date
+		order by p.end_date desc
+	</select>
+	
+	<select id="endTotalContents" resultType="_int">
+		select count(*) as "cnt"
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%' and sysdate>=end_date
+	</select>
+	
+	<select id="selectMainImg" resultType="performance">
+		select *
+		from performanceimage i
+			left join performance p
+			using(performance_no)
+		where i.image_category='M' and p.end_date>sysdate
+	</select>
+	
+	<select id="selectMainImgCnt" resultType="_int">
+		select count(*)
+		from performanceimage i
+			left join performance p
+			using(performance_no)
+		where i.image_category='M' and p.end_date>sysdate
+	</select>
+	
+</mapper>

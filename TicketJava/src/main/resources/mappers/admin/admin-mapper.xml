@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+
+<insert id="insertSchedule">
+insert into Schedule values(SEQ_schedule.nextval,#{performanceNo},TO_DATE(#{scheduleDate},'YYYY-MM-DD HH24:MI'),null)
+
+</insert>
+
+<select id="selectSchedule" resultType="schedule">
+select S.*,(select performance_title from performance where S.performance_no=performance_no) as PERFORMANCE_TITLE from schedule S
+where performance_no = #{performanceNo}
+
+</select>
+
+<select id="searchCount" resultType="_int">
+
+select COUNT(*)
+from(
+select P.*,(select place_name from place  where P.place_code=place_code) as place_name,
+(select performance_code_name from classification where P.performance_code=performance_code)as performance_name  from performance P)N
+where 1=1 
+
+<if test="!searchKeyword.isEmpty()">
+ AND ${searchType} like '%'||#{searchKeyword}||'%'
+</if>
+
+</select>
+
+<select id="selectplaceList" resultType="map">
+select * from place order by place_name
+</select>
+
+<select id="selectPerformance" resultType="map">
+
+	select N.*
+from(
+select P.*,(select place_name from place  where P.place_code=place_code) as place_name,
+(select performance_code_name from classification where P.performance_code=performance_code)as performance_name  from performance P)N
+where 1=1 
+<if test="!searchKeyword.isEmpty()">
+    AND ${searchType} like '%'||#{searchKeyword}||'%'
+  </if>
+  order by start_date desc
+  
+	</select>
+
+<select id="selectPerformanceTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM performance
+	</select>
+
+
+  <insert id="insertPerformance">
+ 	insert INTO performance
+ 	values
+ 	(SEQ_PERFORMANCE.nextval,#{performanceCode},#{placeCode},#{performanceTitle}, #{startDate},#{endDate},0,0,#{runningTime},#{viewingClass},#{casting},#{price})
+  </insert>
+  
+  <update id="PerformanceImageupdate">
+  update performanceimage set 
+  original_file_name=#{originalFileName},
+  renamed_file_name=#{renamedFileName}
+  where  performance_no = #{performanceNo}
+  and  image_category = #{imageCategory}
+  </update>
+  
+  <delete id="deleteSchedule">
+  delete schedule where schedule_no = #{scheduleNo}
+  
+  </delete>
+  
+  <update id="updatePerformance">
+	update performance set 
+ 	performance_Code=#{performanceCode},place_code=#{placeCode},
+ 	performance_Title=#{performanceTitle},start_date =#{startDate},
+ 	end_date=#{endDate},running_time=#{runningTime},
+ 	viewing_class=#{viewingClass},
+ 	casting=#{casting},price=#{price}
+ 	where performance_no = #{performanceNo}
+  </update>
+  
+<insert id="insertinsertPerformanceImage">
+		insert into PerformanceImage
+		values(#{performanceNo},#{imageCategory},#{originalFileName},#{renamedFileName})
+	</insert>
+  
+  <select id="selectperformanceOne" resultType="map">
+  	select * from performance where performance_no = #{performanceNo}
+  </select>
+  
+  <select id="selectperformanceOnefile" resultType="performanceimage">
+  select * from performanceimage where performance_no = #{performanceNo}
+  </select>
+  
+  <select id="selectMemberList" resultType="map">
+  	select * from member 
+  </select>
+  
+  <select id="selectPerformanceList" resultType="map">
+  select P.*,(select place_name from place where P.place_code=place_code)as place_name,
+(select performance_code_name from classification where P.performance_code=performance_code)as performance_name  from performance P order by performance_no DESC
+
+  </select>
+  
+  <select id="selectPerformanceno" resultType="_int">
+  
+ SELECT 
+
+        LAST_NUMBER -1
+
+FROM 
+
+        USER_SEQUENCES 
+
+WHERE 
+
+        SEQUENCE_NAME = 'SEQ_PERFORMANCE'
+        
+  </select>
+  
+  <insert id="insertplace">
+  
+  insert INTO place
+ 	values (#{placeCode},#{placeName},#{seatCount},#{addRess})
+  </insert>
+  
+  <select id="selectbuyList" resultType="ticket">
+  
+  select * from ticket where performance_No = #{performanceNo} and schedule_No = #{scheduleNo}
+  
+  </select>
+  
+ <select id="selectschedule" resultType="map">
+  
+select * from( (select P.*,(select performance_title from performance where P.performance_no=performance_no) as performance_title ,
+RANK() OVER(ORDER BY min_date asc) AS RANK 
+from (select Min(s.start_ticket_date)as min_date,s.performance_no
+from schedule s
+where start_ticket_date >= sysdate
+GROUP BY performance_no )P ) )
+WHERE RANK <![CDATA[ <= ]]>5 
+
+ </select>
+  
+  
+  <select id="selectMemberList2" resultType="map">
+  select * from member
+  where 1=1
+<if test="!searchKeyword.isEmpty()">
+    AND ${searchType} like '%'||#{searchKeyword}||'%'
+  </if>
+  
+  
+  </select>
+  
+  
+    <!-- 카운트 -->
+  
+  <select id="searchmemberCount" resultType="_int">
+  
+  select COUNT(*)
+  from member
+where 1=1 
+<if test="!searchKeyword.isEmpty()">
+    AND ${searchType} like '%'||#{searchKeyword}||'%'
+  </if>
+  
+  </select>
+  
+  <select id="memberTotalCount" resultType="_int">
+  
+  select COUNT(*)
+  from member
+
+  </select>
+  
+  <select id="performanceTotalCount" resultType="_int">
+  
+   select COUNT(*)
+  from performance
+  
+  </select>
+  
+  <select id="todaypurchaseCount" resultType="_int">
+  
+    SELECT COUNT(*) FROM ticket
+where TO_CHAR(purchase_date, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+    
+  </select>
+  
+  <select id="todayScheduleCount" resultType="_int">
+  
+    SELECT COUNT(*) FROM schedule
+where TO_CHAR(schedule_date, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+
+  </select>
+  
+   <!-- 카운트 끝-->
+  
+  <!-- 멤버삭제 -->
+  
+  <delete id="memberdelete">
+  
+  delete member where member_id = #{memberId}
+  
+  </delete>
+  
+  <select id="selectplaceStatistics" resultType="map">
+  
+ select a.*,count(ages) as age_no
+from(
+select gender,
+		floor((to_char(sysdate, 'YYYY') - TO_CHAR(BIRTH_DATE,'YYYY')) / 10) * 10 as ages
+	from
+		member)a
+group by AGES,GENDER
+order by ages
+  
+  </select>
+  
+</mapper>
