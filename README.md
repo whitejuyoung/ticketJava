@@ -27,7 +27,24 @@ Prototyping: kakao oven
 
 스토리보드
 -------------
-
-
+1. 메인 화면 <br>
+<img width="630" alt="t1" src="https://user-images.githubusercontent.com/52874887/62406679-60a65900-b5ea-11e9-8658-608fe9f5b893.PNG">
+<img width="630" alt="t111" src="https://user-images.githubusercontent.com/52874887/62406739-533d9e80-b5eb-11e9-962f-668d93ab1ad4.PNG">
+2. 카테고리 클릭시 <br>
+<img width="630" alt="t3" src="https://user-images.githubusercontent.com/52874887/62406681-60a65900-b5ea-11e9-8d83-db960129a478.PNG">
+<img width="630" alt="t4" src="https://user-images.githubusercontent.com/52874887/62406682-613eef80-b5ea-11e9-88d4-6f6947789501.PNG">
+3. 카테고리 클릭시 <br>
+<img width="630" alt="t5" src="https://user-images.githubusercontent.com/52874887/62406667-5e43ff00-b5ea-11e9-8335-d4611513de64.PNG">
+<img width="630" alt="t6" src="https://user-images.githubusercontent.com/52874887/62406668-5edc9580-b5ea-11e9-9b35-1ac16749b081.PNG">
+<img width="630" alt="t7" src="https://user-images.githubusercontent.com/52874887/62406669-5edc9580-b5ea-11e9-938c-69469d926e17.PNG">
+<img width="630" alt="t8" src="https://user-images.githubusercontent.com/52874887/62406670-5edc9580-b5ea-11e9-9630-3836ef71ecb2.PNG">
+<img width="630" alt="t9" src="https://user-images.githubusercontent.com/52874887/62406671-5edc9580-b5ea-11e9-8e09-b62a472a085f.PNG">
+<img width="630" alt="t10" src="https://user-images.githubusercontent.com/52874887/62406672-5f752c00-b5ea-11e9-96a2-259e29e03f66.PNG">
+<img width="630" alt="t11" src="https://user-images.githubusercontent.com/52874887/62406673-5f752c00-b5ea-11e9-94b7-48e9da9838be.PNG">
+<img width="630" alt="t12" src="https://user-images.githubusercontent.com/52874887/62406674-5f752c00-b5ea-11e9-88dd-0e92f6d02204.PNG">
+<img width="630" alt="t13" src="https://user-images.githubusercontent.com/52874887/62406675-600dc280-b5ea-11e9-8b65-f95f317b8066.PNG">
+<img width="630" alt="t14" src="https://user-images.githubusercontent.com/52874887/62406676-600dc280-b5ea-11e9-8e2f-ab0abee565e9.PNG">
+<img width="630" alt="t15" src="https://user-images.githubusercontent.com/52874887/62406677-600dc280-b5ea-11e9-94e0-0a6c78cfc90f.PNG">
+<img width="630" alt="t16" src="https://user-images.githubusercontent.com/52874887/62406678-600dc280-b5ea-11e9-8dff-da31cb695fb0.PNG">
 
 
