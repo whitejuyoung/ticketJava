@@ -141,6 +141,137 @@ Prototyping: kakao oven
 	}
 ~~~
 
+#### 예매자 성별/연령별 통계
+<img width="443" alt="2019-08-07 13;29;24" src="https://user-images.githubusercontent.com/52874887/62594950-6d42ee00-b917-11e9-87c1-d9343e652788.PNG">
+
+##### 성별 통계
+~~~java
+@RequestMapping("/viewGenderRate")
+	@ResponseBody
+	public Map<String,String> selectGenderRate(@RequestParam("performanceNo") String performanceNo) {
+		
+		//해당 공연 구매자 수 
+		int totalPeople = performanceService.selectTotalPeople(performanceNo);
+		
+		int genderF = performanceService.selectGenderF(performanceNo);
+	
+		int genderM = performanceService.selectGenderM(performanceNo);
+	
+		//여자비율
+		int rateF = (int)Math.round(((double)genderF / totalPeople)*100);
+
+		//남자비율
+		int rateM = (int)Math.round(((double)genderM / totalPeople)*100);
+
+		Map<String,String> map = new HashMap<>();
+		map.put("rateF", Integer.toString(rateF));
+		map.put("rateM", Integer.toString(rateM));
+		
+		
+		return map;
+	}
+~~~
+
+##### 연령별 통계
+
+~~~javascript
+/*연령별 통계*/
+		$.ajax({
+			url:"${pageContext.request.contextPath}/performance/viewAgeRate",
+			data:{performanceNo:"${performance.performanceNo }"},
+			dataType: "json",
+			success:function(data){
+				/* console.log(data); */
+
+				var teenager = data[0];
+				var twenty = data[1];
+				var thirty = data[2];
+				var forty = data[3];
+				var fiffty = data[4];
+				var sixty = data[5];
+				
+				google.charts.load('current', {packages: ['corechart', 'bar']});
+				
+				google.charts.setOnLoadCallback(drawBasic);
+				
+				function drawBasic() {
+					var data = new google.visualization.DataTable();
+					
+						data.addColumn('string');
+						data.addColumn('number');
+						data.addRows([
+							
+							['10대', teenager],
+							['20대', twenty],
+							['30대', thirty],
+							['40대', forty],
+							['50대', fiffty],
+							['60대', sixty],
+					
+					]);
+					var option = {
+					          legend: 'none',
+					          colors: ['rgb(224, 224, 224)']
+					        };
+					var chart = new google.visualization.ColumnChart(
+									document.getElementById('chart_div'));
+					
+					chart.draw(data, option);
+				}
+		},
+		error: function(jqxhr){
+    		  console.log("ajax 처리 실패:"+jqxhr.status);
+    	}
+			
+		});
+		
+	});
+~~~
+
+~~~java
+@RequestMapping("/viewAgeRate")
+	@ResponseBody
+	public int[] selectAgeList(@RequestParam("performanceNo") String performanceNo){
+		
+		List<String> ageList = performanceService.selectAgeList(performanceNo);					
+		logger.info("list"+ageList);
+		//list[25, 1, 1]
+		
+		int teenager = 0;
+		int twenty = 0;
+		int thirty = 0;
+		int forty = 0;
+		int fiffty = 0;
+		int sixty = 0;
+		
+		//리스트의 나이대 별로 분류해서 수 올리기 
+		for(int i = 0 ;i<ageList.size();i++) {
+			/*logger.info(ageList.get(i));*/
+			//10대(1-10살도 10대로 포함)
+			if(Integer.parseInt(ageList.get(i))<20)
+				teenager ++;
+			//20대
+	           else if(Integer.parseInt(ageList.get(i)) >= 20 && Integer.parseInt(ageList.get(i))<30)
+	               twenty++;
+           //30대
+           else if(Integer.parseInt(ageList.get(i)) >= 30 && Integer.parseInt(ageList.get(i))<40)
+               thirty++;
+           //40대
+           else if(Integer.parseInt(ageList.get(i)) >= 40 && Integer.parseInt(ageList.get(i))<50)
+               forty++;
+           //50대
+           else if(Integer.parseInt(ageList.get(i)) >= 50 &&Integer.parseInt(ageList.get(i))<60)
+               fiffty++;
+			//나머지는 60대로 간주 
+			else
+				sixty++;		
+		}
+		
+		int[] ageArr = {teenager,twenty,thirty,forty,fiffty,sixty};
+
+		return ageArr;
+	}
+~~~
 #### 공연 날짜 보기
 <img width="227" alt="m2" src="https://user-images.githubusercontent.com/52874887/62409357-dde4c480-b610-11e9-9615-acfb9b03f678.PNG">
 
